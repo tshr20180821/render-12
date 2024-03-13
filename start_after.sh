@@ -50,10 +50,13 @@ chmod 666 /var/www/html/auth/"${SSH_KEY_FILENAME}"
 
 CURL_OPT="${CURL_OPT} -m 3600 -sSN"
 
+# curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}"req \
+#   | stdbuf -i0 -o0 openssl aes-128-ctr -d -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
+#   | nc 127.0.0.1 8022 \
+#   | stdbuf -i0 -o0 openssl aes-128-ctr -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
+#   | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
 curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}"req \
-  | stdbuf -i0 -o0 openssl aes-128-ctr -d -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
   | nc 127.0.0.1 8022 \
-  | stdbuf -i0 -o0 openssl aes-128-ctr -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
   | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
 
 for i in {1..20}; do \
