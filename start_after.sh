@@ -39,9 +39,9 @@ chown -R "${SSH_USER}":users /home/"${SSH_USER}"
 PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 KEYWORD=$(tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w 64 | head -n 1)
 
-KEYWORD_FILENAME="$(echo "${KEYWORD_FILENAME}""${DUMMY_STRING_2}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
-SSH_USER_FILENAME="$(echo "${SSH_USER_FILENAME}""${DUMMY_STRING_3}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
-SSH_KEY_FILENAME="$(echo "${SSH_KEY_FILENAME}""${DUMMY_STRING_4}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+KEYWORD_FILENAME="$(echo "${KEYWORD_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_2}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+SSH_USER_FILENAME="$(echo "${SSH_USER_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_3}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+SSH_KEY_FILENAME="$(echo "${SSH_KEY_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_4}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 
 echo -n "${KEYWORD}" >/var/www/html/auth/"${KEYWORD_FILENAME}"
 echo -n "${SSH_USER}" >/var/www/html/auth/"${SSH_USER_FILENAME}"
