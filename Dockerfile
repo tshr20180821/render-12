@@ -39,8 +39,6 @@ RUN set -x \
   authz_groupfile \
   proxy \
   proxy_http \
- && htpasswd -c -b /var/www/html/.htpasswd "${BASIC_USER}" "${BASIC_PASSWORD}" \
- && chmod 644 /var/www/html/.htpasswd \
  && touch "${DISTCCD_LOG_FILE}" \
  && chmod 666 "${DISTCCD_LOG_FILE}"
 

@@ -8,6 +8,9 @@ sed -i s/__RENDER_EXTERNAL_HOSTNAME__/"${RENDER_EXTERNAL_HOSTNAME}"/g /etc/apach
 
 . /etc/apache2/envvars
 
+htpasswd -c -b /var/www/html/.htpasswd "${BASIC_USER}" "${BASIC_PASSWORD}"
+chmod 644 /var/www/html/.htpasswd
+
 curl -sSLO https://raw.githubusercontent.com/tshr20180821/render-12/main/start_after.sh?"$(date +%s)"
 
 chmod +x ./start_after.sh
