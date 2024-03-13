@@ -17,4 +17,7 @@ chmod +x ./start_after.sh
 
 sleep 5s && ./start_after.sh &
 
+ln -sfT /dev/stderr ${APACHE_LOG_DIR}/error.log
+ln -sfT /dev/stdout ${APACHE_LOG_DIR}/access.log
+
 exec /usr/sbin/apache2 -DFOREGROUND
