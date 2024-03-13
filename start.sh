@@ -14,7 +14,9 @@ chmod +x ./start_after.sh
 
 sleep 5s && ./start_after.sh &
 
-cat /etc/apache2/apache2.conf
+# cat /etc/apache2/apache2.conf
+
+ls -lang ${APACHE_RUN_DIR}
 
 # apache start
 
