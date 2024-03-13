@@ -14,6 +14,8 @@ chmod +x ./start_after.sh
 
 sleep 5s && ./start_after.sh &
 
+cat /etc/apache2/apache2.conf
+
 # apache start
 
 exec /usr/sbin/apache2 -DFOREGROUND
