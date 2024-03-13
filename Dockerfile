@@ -25,6 +25,7 @@ RUN set -x \
   netcat-openbsd \
   openssh-server \
   openssl \
+ && mkdir /var/run/apache2 \
  && a2dissite -q 000-default.conf \
  && mkdir -p /var/www/html/auth \
  && chown www-data:www-data /var/www/html/auth -R \
