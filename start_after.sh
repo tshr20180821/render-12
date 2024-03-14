@@ -61,14 +61,13 @@ CURL_OPT="${CURL_OPT} -m 3600 -sSN"
 #   | stdbuf -i0 -o0 openssl aes-128-ctr -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
 #   | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
 for ((i=0; i < 10; i++)); do \
-do
   SSH_PORT="$(("${BASE_SSH_PORT}"+"${i}"))"
   curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"req \
     | nc 127.0.0.1 "${SSH_PORT}" \
     | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"res &
 done
 
-for i in {1..20}; do \
+for ((i=0; i < 20; i++)); do \
   sleep 60s \
    && ps aux \
    && curl -sS -A "${i}" -u "${BASIC_USER}":"${BASIC_PASSWORD}" https://"${RENDER_EXTERNAL_HOSTNAME}"/?"$(date +%s)"; \
