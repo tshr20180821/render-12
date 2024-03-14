@@ -34,7 +34,7 @@ cat /home/"${SSH_USER}"/.ssh/"${RENDER_EXTERNAL_HOSTNAME}"-"${SSH_USER}".pub >>/
 chown -R "${SSH_USER}":users /home/"${SSH_USER}"
 
 # dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
-/usr/sbin/dropbear -Eamswp 127.0.0.1:8022 -I 3600
+/usr/sbin/dropbear -Eamswp 127.0.0.1:8022 -p 127.0.0.1:9022 -p 127.0.0.1:10022 -p 127.0.0.1:11022 -p 127.0.0.1:12022 -I 3600
 
 PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 KEYWORD=$(tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w 64 | head -n 1)
@@ -55,9 +55,12 @@ CURL_OPT="${CURL_OPT} -m 3600 -sSN"
 #   | nc 127.0.0.1 8022 \
 #   | stdbuf -i0 -o0 openssl aes-128-ctr -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
 #   | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
-curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}"req \
-  | nc 127.0.0.1 8022 \
-  | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
+for port in 8022 9022 10022 11022 12022
+do
+  curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}""${port}"req \
+    | nc 127.0.0.1 "${port}" \
+    | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${port}"res &
+done
 
 for i in {1..20}; do \
   sleep 60s \
