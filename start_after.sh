@@ -35,10 +35,10 @@ chown -R "${SSH_USER}":users /home/"${SSH_USER}"
 
 BASE_SSH_PORT=5000
 for ((i=0; i < 10; i++)); do \
-  PORTS="${PORTS} -p ""$(("${BASE_SSH_PORT}"+"${i}"))"
+  SSH_PORT="${SSH_PORT} -p ""$(("${BASE_SSH_PORT}"+"${i}"))"
 done
 # dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
-/usr/sbin/dropbear -Eamsw ${PORTS} -I 3600
+/usr/sbin/dropbear -Eamsw ${SSH_PORT} -I 3600
 
 PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 KEYWORD=$(tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w 64 | head -n 1)
