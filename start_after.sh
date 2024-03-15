@@ -65,7 +65,6 @@ for ((i=0; i < 5; i++)); do \
   curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"req \
     | nc 127.0.0.1 "${SSH_PORT}" \
     | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"res &
-  sleep 2s
 done
 
 for ((i=0; i < 20; i++)); do \
