@@ -34,7 +34,7 @@ cat /home/"${SSH_USER}"/.ssh/"${RENDER_EXTERNAL_HOSTNAME}"-"${SSH_USER}".pub >>/
 chown -R "${SSH_USER}":users /home/"${SSH_USER}"
 
 BASE_SSH_PORT=5000
-for ((i=0; i < 10; i++)); do \
+for ((i=0; i < 5; i++)); do \
   SSH_PORT="${SSH_PORT} -p 127.0.0.1:""$(("${BASE_SSH_PORT}"+"${i}"))"
 done
 # dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
@@ -60,12 +60,11 @@ CURL_OPT="${CURL_OPT} -m 3600 -sSN"
 #   | nc 127.0.0.1 8022 \
 #   | stdbuf -i0 -o0 openssl aes-128-ctr -pass "pass:${PASSWORD}" -bufsize 1 -pbkdf2 -iter 1 -md md5 \
 #   | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
-for ((i=0; i < 10; i++)); do \
+for ((i=0; i < 5; i++)); do \
   SSH_PORT="$(("${BASE_SSH_PORT}"+"${i}"))"
   curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"req \
     | nc 127.0.0.1 "${SSH_PORT}" \
     | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"res &
-  sleep 3s
 done
 
 sleep 3s
