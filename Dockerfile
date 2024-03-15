@@ -25,6 +25,7 @@ RUN set -x \
   netcat-openbsd \
   openssh-server \
   openssl \
+ && dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key \
  && mkdir /var/run/apache2 \
  && a2dissite -q 000-default.conf \
  && mkdir -p /var/www/html/auth \
