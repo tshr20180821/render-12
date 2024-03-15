@@ -35,7 +35,7 @@ chown -R "${SSH_USER}":users /home/"${SSH_USER}"
 
 BASE_SSH_PORT=5000
 for ((i=0; i < 10; i++)); do \
-  SSH_PORT="${SSH_PORT} -p ""$(("${BASE_SSH_PORT}"+"${i}"))"
+  SSH_PORT="${SSH_PORT} -p 127.0.0.1:""$(("${BASE_SSH_PORT}"+"${i}"))"
 done
 # dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
 # /usr/sbin/dropbear -Eamswp 8022 -I 3600
@@ -68,7 +68,7 @@ for ((i=0; i < 10; i++)); do \
 done
 
 ss -4anp
-ss -4anp | grep \:${SSH_PORT} | grep -v grep
+ss -4anp | grep \:${SSH_PORT} | grep ESTAB | grep -v grep
 
 for ((i=0; i < 20; i++)); do \
   sleep 60s \
