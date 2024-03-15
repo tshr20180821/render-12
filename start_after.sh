@@ -67,8 +67,10 @@ for ((i=0; i < 10; i++)); do \
     | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"res &
 done
 
+sleep 3s
+
 ss -4antp
-ss -4antp | grep ESTAB | grep -v grep
+ss -4antp | grep ESTAB | grep -v curl | grep -v grep
 
 for ((i=0; i < 20; i++)); do \
   sleep 60s \
