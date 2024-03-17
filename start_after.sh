@@ -23,7 +23,8 @@ chmod 700 /home/"${SSH_USER}"/.ssh
 
 ssh-keygen -f /home/"${SSH_USER}"/.ssh/"${RENDER_EXTERNAL_HOSTNAME}"-"${SSH_USER}" -t rsa -N "" &
 
-/usr/bin/distccd --port=3632 --listen=127.0.0.1 --user=nobody --jobs=$(($(nproc)/2)) --log-level=debug --log-file="${DISTCCD_LOG_FILE}" --daemon --stats --stats-port=3633 --allow-private --job-lifetime=3600
+/usr/bin/distccd --port=3632 --listen=127.0.0.1 --user=nobody --jobs=$(($(nproc)/2)) \
+  --log-level=debug --log-file="${DISTCCD_LOG_FILE}" --daemon --stats --stats-port=3633 --allow-private --job-lifetime=3600
 
 wait
 
