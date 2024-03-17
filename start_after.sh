@@ -42,7 +42,7 @@ done
 # /usr/sbin/dropbear -Eamswp 8022 -I 3600
 /usr/sbin/dropbear -Eamsw "${SSH_PORT}" -I 3600
 
-PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+# PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 KEYWORD=$(tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w 64 | head -n 1)
 
 KEYWORD_FILENAME="$(echo "${KEYWORD_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_2}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
