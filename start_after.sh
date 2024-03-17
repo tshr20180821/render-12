@@ -68,7 +68,7 @@ for ((i=0; i < 5; i++)); do \
     | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"res &
 done
 
-for ((i=0; i < 20; i++)); do \
+for ((i=0; i < 2; i++)); do \
   sleep 60s \
    && ss -4antp \
    && ps aux \
