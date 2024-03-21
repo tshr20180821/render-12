@@ -41,7 +41,7 @@ done
 # dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
 # /usr/sbin/dropbear -Eamswp 8022 -I 3600
 touch /tmp/dropbear.log
-/usr/sbin/dropbear -Eamsw ${SSH_PORT} -I 3600  >>/tmp/dropbear.log 2>&1
+/usr/sbin/dropbear -Eamsw ${SSH_PORT} -I 3600 >>/tmp/dropbear.log 2>&1
 tail -f /tmp/dropbear.log | awk '{print "dropbear " $0}' &
 
 # PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
