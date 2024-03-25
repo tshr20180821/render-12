@@ -65,9 +65,9 @@ CURL_OPT="${CURL_OPT} -m 3600 -sSN"
 #   | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}"res &
 for ((i=0; i < 5; i++)); do \
   SSH_PORT="$(("${BASE_SSH_PORT}"+"${i}"))"
-  curl ${CURL_OPT} "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"req \
+  curl ${CURL_OPT} "${PIPING_SERVER_A}"/"${KEYWORD}""${SSH_PORT}"req \
     | nc 127.0.0.1 "${SSH_PORT}" \
-    | curl ${CURL_OPT} -T - "${PIPING_SERVER}"/"${KEYWORD}""${SSH_PORT}"res &
+    | curl ${CURL_OPT} -T - "${PIPING_SERVER_B}"/"${KEYWORD}""${SSH_PORT}"res &
 done
 
 for ((i=0; i < 2; i++)); do \
