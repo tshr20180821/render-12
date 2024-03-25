@@ -47,9 +47,9 @@ tail -f /tmp/dropbear.log | awk '{print "dropbear " $0}' &
 # PASSWORD="$(echo -n "${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_1}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 KEYWORD=$(tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w 64 | head -n 1 | base64 -w 0 | sed 's/[+\/=]//g')
 
-KEYWORD_FILENAME="$(echo "${KEYWORD_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_2}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
-SSH_USER_FILENAME="$(echo "${SSH_USER_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_3}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
-SSH_KEY_FILENAME="$(echo "${SSH_KEY_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${DUMMY_STRING_4}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+KEYWORD_FILENAME="$(echo "${KEYWORD_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${PIPING_SERVER_A}""${PIPING_SERVER_B}""${DUMMY_STRING_2}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+SSH_USER_FILENAME="$(echo "${SSH_USER_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${PIPING_SERVER_A}""${PIPING_SERVER_B}""${DUMMY_STRING_3}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
+SSH_KEY_FILENAME="$(echo "${SSH_KEY_FILENAME}""${RENDER_EXTERNAL_HOSTNAME}""${PIPING_SERVER_A}""${PIPING_SERVER_B}""${DUMMY_STRING_4}""$(date +%Y/%m/%d)" | base64 -w 0 | sed 's/[+\/=]//g')"
 
 echo -n "${KEYWORD}" >/var/www/html/auth/"${KEYWORD_FILENAME}"
 echo -n "${SSH_USER}" >/var/www/html/auth/"${SSH_USER_FILENAME}"
