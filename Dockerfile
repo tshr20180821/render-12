@@ -1,8 +1,9 @@
 FROM debian:stable-slim
 
-EXPOSE 80
-
 SHELL ["/bin/bash", "-c"]
+
+EXPOSE 80
+ENV DEBIAN_CODE_NAME=bookworm
 
 WORKDIR /app
 
