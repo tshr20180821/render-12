@@ -23,4 +23,7 @@ sleep 5s && ./start_after.sh &
 ln -sfT /dev/stderr "${APACHE_LOG_DIR}"/error.log
 ln -sfT /dev/stdout "${APACHE_LOG_DIR}"/access.log
 
+curl -sSL https://github.com/nwtgck/piping-server-pkg/releases/download/v1.12.9-1/piping-server-pkg-linuxstatic-x64.tar.gz | tar xzf -
+./piping-server-pkg-linuxstatic-x64/piping-server --host=127.0.0.1 --http-port=8080 &
+
 exec /usr/sbin/apache2 -DFOREGROUND
