@@ -29,7 +29,8 @@ RUN set -x \
   openssh-server \
   openssl \
  && apt-get -q -y --no-install-recommends install \
-  curl/"${DEBIAN_CODE_NAME}"-backports | true \
+  curl/"${DEBIAN_CODE_NAME}"-backports || true \
+ && curl --version \
  && dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key \
  && mkdir /var/run/apache2 \
  && a2dissite -q 000-default.conf \
