@@ -11,6 +11,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV DISTCCD_LOG_FILE=/var/www/html/auth/distccd_log.txt
 
 RUN set -x \
+ && TEST_STRING=$(cat /etc/os-release | grep VERSION_CODENAME) \
+ && TEST_STRING=${TEST_STRING:17} \
  && echo "deb http://deb.debian.org/debian ${DEBIAN_CODE_NAME}-backports main contrib non-free" | tee /etc/apt/sources.list.d/backports.list \
  && time apt-get -qq update \
  && time apt-get -q -y --no-install-recommends install \
