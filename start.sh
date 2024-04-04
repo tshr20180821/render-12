@@ -4,6 +4,8 @@ set -x
 
 export PS4='+(${BASH_SOURCE}:${LINENO}): '
 
+echo ${DEBIAN_CODE_NAME}
+
 cat /proc/version
 cat /etc/os-release
 
