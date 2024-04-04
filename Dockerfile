@@ -11,7 +11,7 @@ ENV DISTCCD_LOG_FILE=/var/www/html/auth/distccd_log.txt
 
 RUN set -x \
  && DEBIAN_CODE_NAME=$(cat /etc/os-release | grep VERSION_CODENAME) \
- && DEBIAN_CODE_NAME=${DEBIAN_CODE_NAME:17} \
+ && export DEBIAN_CODE_NAME=${DEBIAN_CODE_NAME:17} \
  && echo "deb http://deb.debian.org/debian ${DEBIAN_CODE_NAME}-backports main contrib non-free" | tee /etc/apt/sources.list.d/backports.list \
  && time apt-get -qq update \
  && time apt-get -q -y --no-install-recommends install \
