@@ -52,6 +52,8 @@ RUN set -x \
 COPY ./apache.conf /etc/apache2/sites-enabled/
 COPY --chmod=755 ./*.sh ./
 
+ENV TEST_ENV=$(curl -sSL https://raw.githubusercontent.com/tshr20180821/files/master/VERSION_PHPPGADMIN)
+
 STOPSIGNAL SIGWINCH
 
 ENTRYPOINT ["/bin/bash","/app/start.sh"]
